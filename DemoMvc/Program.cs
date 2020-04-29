@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+using Azure.Identity;
 
 namespace DemoMvc
 {
@@ -25,7 +26,8 @@ namespace DemoMvc
                         var settings = config.Build();
                         config.AddAzureAppConfiguration(options =>
                         {
-                            options.Connect(settings["ConnectionStrings:AppConfig"])
+                            var credentials = new ManagedIdentityCredential("7ef18e0c-e2c2-49ce-8caf-7098438cc473");
+                            options.Connect(new Uri(settings["AppConfig:Endpoint"]), credentials)
                                 .ConfigureRefresh(refresh =>
                                 {
                                     refresh.Register("TestApp:Settings:Sentinel", refreshAll: true)

@@ -19,11 +19,6 @@ az appconfig feature set -n demoac054 --feature Beta -y
 az appconfig feature enable -n demoac054 --feature Beta -y
 
 ***********************************
-****** Managed Identity ***********
-
-az webapp identity assign -n demomvc054 -g demoResourceGroup
-
-***********************************
 ****** Move App to Azure **********
 
 az acr create -g demoResourceGroup -n democr054 --sku Basic --admin-enabled true
@@ -32,7 +27,12 @@ az acr credential show -n democr054
 
 az appservice plan create -n demoplan -g demoResourceGroup --sku S1 --is-linux
 
-az webapp create -g demoResourceGroup -p demoplan -n demoapi054 --docker-registry-server-user democr054 --docker-registry-server-password chT=5mT7l/I8et0RBew84vlasghuOYUX --deployment-container-image-name democr054.azurecr.io/demoapi:latest
+az webapp create -g demoResourceGroup -p demoplan -n demomvc054 --docker-registry-server-user democr054 --docker-registry-server-password 6IGYvu0jY07lJg1yK9WPO+vToZoUpk6n --deployment-container-image-name democr054.azurecr.io/demomvc:latest
+
+***********************************
+****** Managed Identity ***********
+
+az webapp identity assign -n demomvc054 -g demoResourceGroup
 
 ***********************************
 ****** Key Vault ******************
