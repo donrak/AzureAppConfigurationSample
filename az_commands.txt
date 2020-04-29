@@ -43,6 +43,10 @@ az keyvault secret set --vault-name demokv054 -n SecretMessage --value "Secret m
 
 az appconfig kv set-keyvault -n demoac054 --key TestApp:Settings:SecretMessage --secret-identifier https://demokv054.vault.azure.net/secrets/SecretMessage -y
 
+az webapp identity assign -n demomvc054 -g demoResourceGroup
+
+az keyvault set-policy -n demokv054 --object-id "7ef18e0c-e2c2-49ce-8caf-7098438cc473" --secret-permissions get list
+
 ***********************************
 ****** Remove resource group ******
 
