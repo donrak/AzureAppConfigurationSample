@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.FeatureManagement;
 
 namespace DemoMvc
 {
@@ -23,6 +24,7 @@ namespace DemoMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddFeatureManagement();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +39,7 @@ namespace DemoMvc
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseAzureAppConfiguration();
-            
+
             app.UseStaticFiles();
 
             app.UseRouting();

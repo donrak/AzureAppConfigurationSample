@@ -30,7 +30,8 @@ namespace DemoMvc
                                 {
                                     refresh.Register("TestApp:Settings:Sentinel", refreshAll: true)
                                         .SetCacheExpiration(new TimeSpan(0, 0, 10));
-                                });
+                                })
+                                .UseFeatureFlags();
                         });
                     })
                 .UseStartup<Startup>());
