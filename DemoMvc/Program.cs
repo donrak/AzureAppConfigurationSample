@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 
 namespace DemoMvc
 {
@@ -19,8 +20,11 @@ namespace DemoMvc
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        var settings = config.Build();
+                        config.AddAzureAppConfiguration(settings["ConnectionStrings:AppConfig"]);
+                    })
+                .UseStartup<Startup>());
     }
 }
