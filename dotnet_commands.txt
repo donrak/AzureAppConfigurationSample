@@ -1,0 +1,17 @@
+dotnet new mvc -o DemoMvc --no-https
+
+dotnet user-secrets init
+
+dotnet add package Microsoft.Azure.AppConfiguration.AspNetCore
+
+dotnet user-secrets set ConnectionStrings:AppConfig Endpoint=https://demoac054.azconfig.io;Id=CP27-l9-s0:GoVAkIED15gGtn3JGwol;Secret=I1jluwdB+ouAkOWbiAojTMwCAN+A8OiQ3So8cgBVlHU=
+
+********************
+
+dotnet add package Microsoft.FeatureManagement.AspNetCore
+
+********************
+
+dotnet add package Azure.Identity
+
+*********************

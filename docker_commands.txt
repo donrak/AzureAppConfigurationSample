@@ -1,0 +1,9 @@
+docker login https://democr054.azurecr.io -u democr054 -p <password>
+
+docker build -t demomvc .
+
+docker run -it --rm -p 8080:80 demomvc
+
+docker tag demomvc democr054.azurecr.io/demomvc:latest
+
+docker push democr054.azurecr.io/demomvc:latest
