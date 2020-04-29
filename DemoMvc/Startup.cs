@@ -36,6 +36,8 @@ namespace DemoMvc
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseAzureAppConfiguration();
+            
             app.UseStaticFiles();
 
             app.UseRouting();

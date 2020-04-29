@@ -23,7 +23,15 @@ namespace DemoMvc
                     webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                     {
                         var settings = config.Build();
-                        config.AddAzureAppConfiguration(settings["ConnectionStrings:AppConfig"]);
+                        config.AddAzureAppConfiguration(options =>
+                        {
+                            options.Connect(settings["ConnectionStrings:AppConfig"])
+                                .ConfigureRefresh(refresh =>
+                                {
+                                    refresh.Register("TestApp:Settings:Sentinel", refreshAll: true)
+                                        .SetCacheExpiration(new TimeSpan(0, 0, 10));
+                                });
+                        });
                     })
                 .UseStartup<Startup>());
     }
